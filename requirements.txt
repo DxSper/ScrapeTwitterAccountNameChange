@@ -1,0 +1,4 @@
+requests
+py-cord
+selenium
+webdriver-manager
