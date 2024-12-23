@@ -29,3 +29,9 @@ Ce bot Discord surveille une liste d'URLs x.com (twitter) et envoie des notifica
 pip install -r requirements.txt
 python main.py
 ```
+
+## Commandes du bot
+- /seturls <url> : Ajoute un url à la liste des URLs à surveiller.
+- /removeurl <url> : Supprime une URL de la liste.
+- /listurls : Affiche la liste des URLs surveillées.
+- /help : Affiche cette liste d'aide.
