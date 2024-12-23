@@ -23,6 +23,8 @@ Ce bot Discord surveille une liste d'URLs x.com (twitter) et envoie des notifica
 ## Instalation
 
 - Assurez-vous d'avoir Python et Chrome installé sur votre machine.
+- Modifier les valeurs dans config.py avec vos tokens, id et compte
+- Modifier vos cibles dans urls.json
 - Ouvrir un terminal dans le dossier du programme.
 - Tapez les commandes suivantes :
 ```bash
