@@ -1,4 +1,4 @@
-# Discord URL Monitor Bot
+# URLs Twitter/X Monitor Discord Bot
 
 Ce bot Discord surveille une liste d'URLs x.com (twitter) et envoie des notifications via un webhook Discord lorsque des changements sont détectés. Il utilise Selenium pour accéder aux pages web et vérifier les changements.
 
