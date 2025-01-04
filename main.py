@@ -5,6 +5,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager as CM
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import threading
 import time
 from urls import load_urls, save_urls  # Importer les fonctions pour charger et sauvegarder les URLs
@@ -104,9 +105,15 @@ async def list_urls(ctx):
         await ctx.respond("Aucune URL n'est actuellement surveillée.")
 
 def check_account(url):
+     # Configurer les options pour le mode headless
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")  # Activer le mode headless
+    chrome_options.add_argument("--no-sandbox")  # Nécessaire pour certains environnements Linux
+    chrome_options.add_argument("--disable-dev-shm-usage")  # Éviter les problèmes de mémoire partagée
+    chrome_options.add_argument("--disable-gpu") 
+    chrome_options.add_argument('log-level=3')
     service = Service(executable_path=CM().install())
-    driver = webdriver.Chrome(service=service)
-
+    driver = webdriver.Chrome(service=service, options=chrome_options)  
     account_exists = True
 
     while account_exists:
@@ -132,6 +139,15 @@ def check_account(url):
         else:
             try:
                 error_message = driver.find_element(By.XPATH, "//*[@id='react-root']/div/div/div[2]/main/div/div/div/div[1]/div/div[3]/div/div/div[2]/div/div[1]/span")
+                # si error message contient attention ou caution alors return :
+                # Obtenir le texte de l'élément
+                error_message_text = error_message.text
+
+                # Vérifier si le message d'erreur contient "attention" ou "caution"
+                if "attention" in error_message_text.lower() or "caution" in error_message_text.lower():
+                    print("Compte X restreint mais existant pour " + url)
+                    return
+                
                 if error_message:
                     send_discord_message(f"Le compte de {url} a changé de nom. @everyone " + x_account_following_target)
                     # L'alerte a ete envoyer donc supprimer l'url pour ne pas envoyer d'autre alerte
