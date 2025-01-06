@@ -10,8 +10,7 @@ import threading
 import time
 from urls import load_urls, save_urls  # Importer les fonctions pour charger et sauvegarder les URLs
 from config import *
-# Configuration du webhook Discord
-WEBHOOK_URL = 'https://discord.com/api/webhooks/1320759587942436936/CYIKwZQCOlmt42DJcox9fIzfm3Frrx7cM8KJO8yuBt7cqHbZ7efURuKMmwmKgJhGy0cJ'
+
 # Fonction pour envoyer un message au webhook Discord
 def send_discord_message(message):
     data = {
